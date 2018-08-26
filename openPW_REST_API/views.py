@@ -28,21 +28,21 @@ def registration(request):
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         company_form = CompanyForm(data=request.POST)
-        if request.POST['password'] == request.POST['confirm']:
-            try:
-                validate_password(request.POST['password'], user=None, password_validators=None)
-            except:
-                passErrors = password_validators_help_texts()
-            if user_form.is_valid() and company_form.is_valid():
-                user = user_form.save()
-                user.set_password(user.password)
-                user.save()
-                company = company_form.save(commit=False)
-                company.user = user
-                company.save()
-                return HttpResponseRedirect('/api-auth/login/?next=/')
-        else:
-            error = 'passwords did\'t match'
+        try:
+            validate_password(request.POST['password'], user=None, password_validators=None)
+            if request.POST['password'] == request.POST['confirm']:
+                if user_form.is_valid() and company_form.is_valid():
+                    user = user_form.save()
+                    user.set_password(user.password)
+                    user.save()
+                    company = company_form.save(commit=False)
+                    company.user = user
+                    company.save()
+                    return HttpResponseRedirect('/api-auth/login/?next=/')
+            else:
+                error = 'passwords did\'t match'
+        except:
+            passErrors = password_validators_help_texts()
     else:
         user_form = UserForm()
         company_form = CompanyForm()
