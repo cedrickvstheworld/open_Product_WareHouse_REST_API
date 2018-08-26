@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'cedrickdomingo048@gmail.com'
-EMAIL_HOST_PASSWORD = 'longview048'
+EMAIL_HOST_PASSWORD = '***'
 EMAIL_PORT = 587
 
 
@@ -98,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'openpw_db',
         'USER': 'postgres',
-        'PASSWORD': 'longview048',
+        'PASSWORD': '***',
         'HOST': 'localhost',
         'PORT': '',
     }
