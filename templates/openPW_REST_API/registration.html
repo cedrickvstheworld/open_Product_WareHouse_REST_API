@@ -1,0 +1,47 @@
+{% extends 'openPW_REST_API/headerFrame.html' %}
+
+{% block content %}
+    <h5 class="text-info">Sign up Here</h5>
+    <form class="form-group" id="user_form" method="post" action="{% url 'index' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+        {% for field in user_form%}
+            {{ field }}
+            {% if field.errors %}
+                <script>
+                document.write('<div class="alert alert-danger" role="alert">{{ field.errors }}</div>');
+                </script>
+            {% endif %}
+            <br><br>
+        {% endfor %}
+
+        <input type="password" class="form-control-sm" name="confirm" placeholder="confirm password"><br><br>
+
+    {% if passwordErrors is not False %}
+        {% for i in passwordErrors %}
+        <script>
+            document.write('<div class="alert alert-danger" role="alert">{{ i }}</div>');
+        </script>
+        {% endfor %}
+    {% endif %}
+
+        {% for field in company_form %}
+            {{ field }}
+            {% if field.errors %}
+                <script>
+                document.write('<div class="alert alert-danger" role="alert">{{ field.errors }}</div>');
+                </script>
+            {% endif %}
+            <br><br>
+        {% endfor %}
+    {% if error %}
+        <script>
+            document.write('<div class="alert alert-danger" role="alert">{{ error }}</div>');
+        </script>
+    {% endif %}
+
+    <input class="btn btn-success" type="submit" name="submit" value="Register">
+
+    </form>
+
+{% endblock %}
